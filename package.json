@@ -1,0 +1,36 @@
+{
+  "name": "crispum",
+  "version": "0.0.0",
+  "description": "Declarative parsing pipeline with basic map reduction",
+  "main": "index.js",
+  "scripts": {
+    "test": "semistandard && tape test.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisinajar/crispum.git"
+  },
+  "keywords": [
+    "parse",
+    "obstruction",
+    "object",
+    "functional"
+  ],
+  "author": "Chris Vickery <chrisinajar@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrisinajar/crispum/issues"
+  },
+  "homepage": "https://github.com/chrisinajar/crispum#readme",
+  "devDependencies": {
+    "semistandard": "^11.0.0",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3"
+  },
+  "dependencies": {
+    "ap": "^0.2.0",
+    "isarray": "^2.0.1",
+    "obstruction": "^2.1.0",
+    "xtend": "^4.0.1"
+  }
+}
