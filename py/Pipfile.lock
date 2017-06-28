@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8bb5156c42d58e6bcd35a072d19d525d06cdef03823176f58d4c56314c400b7a"
+            "sha256": "bf5cec2208b77e3d99ebe2b354c4bb4c0473b89573496e16785067c51e1b1b28"
         },
         "requires": {},
         "sources": [
@@ -37,5 +37,18 @@
             "version": "==1.1.0"
         }
     },
-    "develop": {}
+    "develop": {
+        "pip": {
+            "version": "==9.0.1"
+        },
+        "pypandoc": {
+            "version": "==1.4"
+        },
+        "setuptools": {
+            "version": "==36.0.1"
+        },
+        "wheel": {
+            "version": "==0.29.0"
+        }
+    }
 }

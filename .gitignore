@@ -40,3 +40,7 @@ __pycache__
 .DS_Store
 .py3-env
 .py2-env
+*.egg-info/
+py/dist/
+.test-env
+py/build/
