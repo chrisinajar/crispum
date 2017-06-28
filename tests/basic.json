@@ -277,4 +277,54 @@
     "default value",
     "other value!"
   ]
+}, {
+  "comment": "complex nested conditionals",
+  "schema": [{
+    "type": "pluck",
+    "key": "indeed"
+  }, {
+    "type": "array"
+  }, {
+    "type": "conditional",
+    "key": "foo",
+    "default": {
+      "type": "filter"
+    },
+    "options": {
+      "bar": {
+        "type": "pluck",
+        "key": "nested"
+      },
+      "baz": {
+        "type": "pluck",
+        "key": "special"
+      }
+    }
+  }, {
+    "type": "dearray"
+  }, {
+    "type": "simple",
+    "keys": {
+      "result": "0",
+      "extra": "1"
+    }
+  }],
+  "input": {
+    "extra": "oh hey",
+    "indeed": [{
+      "foo": "bar",
+      "nested": "value"
+    }, {
+      "foo": "boozle",
+      "nested": "lost in space"
+    }, {
+      "foo": "baz",
+      "nested": "value",
+      "special": "so bazzy"
+    }]
+  },
+  "expected": {
+    "result": "value",
+    "extra": "so bazzy"
+  }
 }]

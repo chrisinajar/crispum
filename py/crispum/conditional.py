@@ -1,4 +1,4 @@
-
+from pprint import pprint
 # {
 #   "type": "conditional",
 #   "key": "awesome",
@@ -18,6 +18,7 @@
 #   }
 
 def conditionalParser (options, createParser, data):
+  pprint(data)
   keyVal = data.get(options.get('key'))
   default = options.get('default')
   valueOptions = options.get('options')

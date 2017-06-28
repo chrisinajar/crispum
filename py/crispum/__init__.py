@@ -41,7 +41,14 @@ def createParser (options):
   # return result;
 
 def arrayParser (parse, data):
-  return list(filter(isNotFiltered, map(combineParsers(parse, processOutput), data)))
+  extraKeys = {}
+  if isinstance(data, tuple):
+    data, extraKeys = data
+  result = list(filter(isNotFiltered, map(combineParsers(parse, processOutput), data)))
+  if len(extraKeys):
+    return result, extraKeys
+  else:
+    return result
 
 def isNotFiltered (val):
   return val != FILTER_CONST
