@@ -65,7 +65,14 @@ function basicParse (options, data) {
 }
 
 function pluckParse (options, data) {
-  return data[options.key];
+  var result = data[options.key];
+
+  if (options.keys) {
+    options.keys.forEach(function (name) {
+      result[name] = data[name];
+    });
+  }
+  return result;
 }
 
 function conditionalParse (options, data) {
@@ -106,6 +113,9 @@ function joinParsers (optionAr) {
     var type = val.type || val;
     if (type === 'array') {
       arrayed = true;
+      if (val.keys) {
+        return carryKeysIntoArray(val.keys, memo);
+      }
       return memo;
     }
     if (type === 'dearray') {
@@ -134,4 +144,17 @@ function filterFallthrough (parse, data) {
   }
 
   return parse(data);
+}
+
+function carryKeysIntoArray (keys, memo) {
+  return function (data) {
+    data = memo(data);
+    data = data.map(function (entry) {
+      keys.forEach(function (key) {
+        entry[key] = data[key];
+      });
+      return entry;
+    });
+    return data;
+  };
 }

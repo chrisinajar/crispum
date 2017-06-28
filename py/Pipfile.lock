@@ -1,0 +1,41 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "8bb5156c42d58e6bcd35a072d19d525d06cdef03823176f58d4c56314c400b7a"
+        },
+        "requires": {},
+        "sources": [
+            {
+                "url": "https://pypi.python.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "argparse": {
+            "version": "==1.4.0"
+        },
+        "dot-prop": {
+            "version": "==0.2.0"
+        },
+        "linecache2": {
+            "version": "==1.0.0"
+        },
+        "map-object": {
+            "version": "==1.1.1"
+        },
+        "obstruction": {
+            "version": "==0.1.1"
+        },
+        "six": {
+            "version": "==1.10.0"
+        },
+        "traceback2": {
+            "version": "==1.4.0"
+        },
+        "unittest2": {
+            "version": "==1.1.0"
+        }
+    },
+    "develop": {}
+}

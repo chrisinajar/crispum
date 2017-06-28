@@ -1,0 +1,280 @@
+[{
+  "schema": {
+    "type": "simple",
+    "keys": {
+      "indeed": "awesome"
+    }
+  },
+  "input": {
+    "awesome": "it works!"
+  },
+  "expected": {
+    "indeed": "it works!"
+  }
+}, {
+  "schema": {
+    "type": "simple",
+    "keys": {
+      "indeed": "awesome"
+    }
+  },
+  "input": {
+    "awesome": "it works!",
+    "extra": "still here!"
+  },
+  "expected": {
+    "indeed": "it works!",
+    "extra": "still here!"
+  }
+}, {
+  "schema": {
+    "type": "simple",
+    "keys": {
+      "awesome": true,
+      "indeed": "awesome"
+    }
+  },
+  "input": {
+    "awesome": "it works!",
+    "extra": "still here!"
+  },
+  "expected": {
+    "awesome": "it works!",
+    "indeed": "it works!",
+    "extra": "still here!"
+  }
+}, {
+  "schema": {
+    "type": "simple",
+    "array": true,
+    "keys": {
+      "indeed": "awesome"
+    }
+  },
+  "input": [{
+    "awesome": "it works!",
+    "extra": "still here!"
+  }, {
+    "awesome": "also awesome",
+    "extra2": "more extra values"
+  }],
+  "expected": [{
+    "indeed": "it works!",
+    "extra": "still here!"
+  }, {
+    "indeed": "also awesome",
+    "extra2": "more extra values"
+  }]
+}, {
+  "schema": [{
+    "type": "simple",
+    "keys": {
+      "awesome": "chain"
+    }
+  }, {
+    "type": "simple",
+    "keys": {
+      "indeed": "awesome"
+    }
+  }],
+  "input": {
+    "chain": "it works!",
+    "extra": "still here!"
+  },
+  "expected": {
+    "indeed": "it works!",
+    "extra": "still here!"
+  }
+}, {
+  "schema": [{
+    "type": "array"
+  }, {
+    "type": "simple",
+    "keys": {
+      "indeed": "awesome"
+    }
+  }],
+  "input": [{
+    "awesome": "it works!",
+    "extra": "still here!"
+  }, {
+    "awesome": "also awesome",
+    "extra2": "more extra values"
+  }],
+  "expected": [{
+    "indeed": "it works!",
+    "extra": "still here!"
+  }, {
+    "indeed": "also awesome",
+    "extra2": "more extra values"
+  }]
+}, {
+  "schema": [{
+    "type": "array"
+  }, {
+    "type": "simple",
+    "keys": {
+      "indeed": "awesome"
+    }
+  }, {
+    "type": "dearray"
+  }, {
+    "type": "simple",
+    "keys": {
+      "value": "0",
+      "1": false
+    }
+  }],
+  "input": [{
+    "awesome": "it works!",
+    "extra": "still here!"
+  }, {
+    "awesome": "also awesome",
+    "extra2": "more extra values"
+  }],
+  "expected": {
+    "value": {
+      "indeed": "it works!",
+      "extra": "still here!"
+    }
+  }
+}, {
+  "comment": "Basic pluck",
+  "schema": {
+    "type": "pluck",
+    "key": "awesome"
+  },
+  "input": {
+    "awesome": "it works!",
+    "extra": "still here!"
+  },
+  "expected": "it works!"
+}, {
+  "comment": "pluck with keys",
+  "schema": {
+    "type": "pluck",
+    "key": "awesome",
+    "keys": ["indeed"]
+  },
+  "input": {
+    "indeed": "asdffdsa",
+    "awesome": {
+      "foo": "it works!"
+    },
+    "extra": "still here!"
+  },
+  "expected": {
+    "foo": "it works!",
+    "indeed": "asdffdsa"
+  }
+}, {
+  "comment": "pluck with keys then array mapped",
+  "schema": [{
+    "type": "pluck",
+    "key": "awesome",
+    "keys": ["indeed"]
+  }, {
+    "type": "array",
+    "keys": ["indeed"]
+  }],
+  "input": {
+    "indeed": "asdffdsa",
+    "awesome": [{
+      "foo": "it works foo!"
+    }, {
+      "bar": "it works bar!"
+    }],
+    "extra": "still here!"
+  },
+  "expected": [{
+    "indeed": "asdffdsa",
+    "foo": "it works foo!"
+  }, {
+    "indeed": "asdffdsa",
+    "bar": "it works bar!"
+  }]
+}, {
+  "comment": "Basic conditional",
+  "schema": [{
+    "type": "array"
+  }, {
+    "type": "conditional",
+    "key": "awesome",
+    "default": {
+      "type": "pluck",
+      "key": "default"
+    },
+    "options": {
+      "indeed": {
+        "type": "pluck",
+        "key": "indeed"
+      },
+      "other": {
+        "type": "pluck",
+        "key": "other"
+      }
+    }
+  }],
+  "input": [{
+    "awesome": "it works!",
+    "default": "default value",
+    "indeed": "still here!",
+    "other": "other value!"
+  }, {
+    "awesome": "indeed",
+    "default": "default value",
+    "indeed": "still here!",
+    "other": "other value!"
+  }, {
+    "awesome": "other",
+    "default": "default value",
+    "indeed": "still here!",
+    "other": "other value!"
+  }],
+  "expected": [
+    "default value",
+    "still here!",
+    "other value!"
+  ]
+}, {
+  "comment": "basic filter",
+  "schema": [{
+    "type": "array"
+  }, {
+    "type": "conditional",
+    "key": "awesome",
+    "default": {
+      "type": "pluck",
+      "key": "default"
+    },
+    "options": {
+      "indeed": {
+        "type": "filter"
+      },
+      "other": {
+        "type": "pluck",
+        "key": "other"
+      }
+    }
+  }],
+  "input": [{
+    "awesome": "it works!",
+    "default": "default value",
+    "indeed": "still here!",
+    "other": "other value!"
+  }, {
+    "awesome": "indeed",
+    "default": "default value",
+    "indeed": "still here!",
+    "other": "other value!"
+  }, {
+    "awesome": "other",
+    "default": "default value",
+    "indeed": "still here!",
+    "other": "other value!"
+  }],
+  "expected": [
+    "default value",
+    "other value!"
+  ]
+}]
